@@ -10,12 +10,28 @@ public class Program {
         }
         boolean isPrime = true;
         int i = 2;
-        for (; (i < Math.sqrt(number) + 1) && isPrime; i++) {
+        for (; (i < mySqrt(number) + 1) && isPrime; i++) {
             if ((number % i) == 0) {
                 isPrime = false;
             }
         }
-        scanner.close();
-        System.out.println(isPrime + " " + (i -2));
+        System.out.print(isPrime + " " + (i - 2));
+    }
+
+    public static double mySqrt(double x) {
+        double result = x / 2;
+        double tmp;
+        boolean stop = false;
+        while (!stop) {
+            tmp = result;
+            result = (result + x / result) / 2;
+            stop = isResultFound(result, tmp);
+        }
+        return result;
+    }
+
+    public static boolean isResultFound(double a, double b) {
+        double difference = (a - b) < 0 ? -1 * (a - b) : (a - b);
+        return difference <= 0.00001;
     }
 }
